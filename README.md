@@ -265,4 +265,8 @@ def data_augmentation(X_train, y_train, batch_size=32):
 
 ### Análise dos resultados
 
-O modelo lenet 5 teve um resultado bem ruim, na questão de treinamento ele foi melhorando ao passar das épocas poré o teste foi piorando. Alcançando 
+O modelo lenet 5 teve um resultado bem ruim, na questão de treinamento ele foi melhorando ao passar das épocas porém o teste foi piorando. Nesse modelo embora ele tenha acertado quase 50% de cada classe, para as classes pássaro, gato e cachorro foi obtido valores baixos de acerto.
+
+Do modelo lenet 5 para o modelo melhorado 01, foi implementado 2 dropout de valores 0.25, o que melhorou muito a curva de aprendizado onde o treino e o teste foi caminhando junto. Pássaro, gato e cachorro continuaram a ser as classes menos acertadas.
+
+Do modelo 01 para o modelo 02, 
