@@ -2,6 +2,23 @@
 
 ## Autores: Gabriel de Sousa e Suellen Oliveira
 
+### Classes
+
+```python
+classes = {
+    "airplane": 0,
+    "automobile": 1,
+    "bird": 2,
+    "cat": 3,
+    "deer": 4,
+    "dog": 5,
+    "frog": 6,
+    "horse": 7,
+    "ship": 8,
+    "truck": 9,
+}
+```
+
 ### Modelo Inicial: lenet_5
 
 ```python
@@ -245,3 +262,7 @@ def data_augmentation(X_train, y_train, batch_size=32):
 
 ## Curva ROC (com a AUC)
 ![alt text](image-17.png)
+
+### Análise dos resultados
+
+O modelo lenet 5 teve um resultado bem ruim, na questão de treinamento ele foi melhorando ao passar das épocas poré o teste foi piorando. Alcançando 
