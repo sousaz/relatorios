@@ -34,9 +34,7 @@ def CNN_model(input_shape=(32, 32, 3), num_classes=10):
 
 > F1 Score:  0.5197
 
-## Sensibilidade(TPR) e Especifidade(TNR)
-
-## Acurácia ponderada e Curva ROC (com a AUC)
+## Curva ROC (com a AUC)
 ![alt text](image-2.png)
 
 ### Modelo melhorado: Implementando Dropout
@@ -74,13 +72,11 @@ def model1(input_shape=(32, 32, 3), num_classes=10):
 
 > F1 Score:  0.5391
 
-## Sensibilidade(TPR) e Especifidade(TNR)
-
-## Acurácia ponderada e Curva ROC (com a AUC)
+## Curva ROC (com a AUC)
 ![alt text](image-5.png)
 
 
-### Modelo melhorado: Mudando alguns parametros
+### Modelo melhorado: Mudando alguns parâmetros
 
 ```python
 def model2(input_shape=(32, 32, 3), num_classes=10):
@@ -117,9 +113,7 @@ def model2(input_shape=(32, 32, 3), num_classes=10):
 
 > F1 Score:  0.7177
 
-## Sensibilidade(TPR) e Especifidade(TNR)
-
-## Acurácia ponderada e Curva ROC (com a AUC)
+## Curva ROC (com a AUC)
 ![alt text](image-8.png)
 
 ### Modelo melhorado: Adicionando camadas e ajustando parametros
@@ -164,9 +158,7 @@ def model3(input_shape=(32, 32, 3), num_classes=10):
 
 > F1 Score:  0.7069
 
-## Sensibilidade(TPR) e Especifidade(TNR)
-
-## Acurácia ponderada e Curva ROC (com a AUC)
+## Curva ROC (com a AUC)
 ![alt text](image-11.png)
 
 ### Modelo melhorado: Adicionando BatchNormalization e usando RELU como ativação
@@ -221,7 +213,35 @@ def model4(input_shape=(32, 32, 3), num_classes=10):
 
 > F1 Score:  0.8483
 
-## Sensibilidade(TPR) e Especifidade(TNR)
-
-## Acurácia ponderada e Curva ROC (com a AUC)
+## Curva ROC (com a AUC)
 ![alt text](image-14.png)
+
+### Modelo melhorado: Adicionando Data-Augmentation
+
+```python
+def data_augmentation(X_train, y_train, batch_size=32):
+  from tensorflow.keras.preprocessing.image import ImageDataGenerator
+
+  train_datagen = ImageDataGenerator(width_shift_range=0.1,
+                                     height_shift_range=0.1,
+                                     horizontal_flip=True,
+                                     rotation_range=20)
+
+  return train_datagen.flow(X_train, y_train)
+```
+
+## Curva de Aprendizado
+![alt text](image-15.png)
+
+## Matriz de Confusão
+![alt text](image-16.png)
+
+## F1-score, Recall e Precision
+> Recall:  0.8324
+
+> Precision:  0.8405
+
+> F1 Score:  0.8364
+
+## Curva ROC (com a AUC)
+![alt text](image-17.png)
