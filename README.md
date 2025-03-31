@@ -37,7 +37,7 @@ def CNN_model(input_shape=(32, 32, 3), num_classes=10):
 ## Curva ROC (com a AUC)
 ![alt text](image-2.png)
 
-### Modelo melhorado: Implementando Dropout
+### Modelo melhorado 01: Implementando Dropout
 
 ```python
 def model1(input_shape=(32, 32, 3), num_classes=10):
@@ -76,7 +76,7 @@ def model1(input_shape=(32, 32, 3), num_classes=10):
 ![alt text](image-5.png)
 
 
-### Modelo melhorado: Mudando alguns parâmetros
+### Modelo melhorado 02: Mudando alguns parâmetros
 
 ```python
 def model2(input_shape=(32, 32, 3), num_classes=10):
@@ -116,7 +116,7 @@ def model2(input_shape=(32, 32, 3), num_classes=10):
 ## Curva ROC (com a AUC)
 ![alt text](image-8.png)
 
-### Modelo melhorado: Adicionando camadas e ajustando parametros
+### Modelo melhorado 03: Adicionando camadas e ajustando parâmetros
 
 ```python
 def model3(input_shape=(32, 32, 3), num_classes=10):
@@ -161,7 +161,7 @@ def model3(input_shape=(32, 32, 3), num_classes=10):
 ## Curva ROC (com a AUC)
 ![alt text](image-11.png)
 
-### Modelo melhorado: Adicionando BatchNormalization e usando RELU como ativação
+### Modelo melhorado 04: Adicionando BatchNormalization e usando RELU como ativação
 
 ```python
 def model4(input_shape=(32, 32, 3), num_classes=10):
@@ -216,7 +216,7 @@ def model4(input_shape=(32, 32, 3), num_classes=10):
 ## Curva ROC (com a AUC)
 ![alt text](image-14.png)
 
-### Modelo melhorado: Adicionando Data-Augmentation
+### Modelo melhorado 05: Adicionando Data-Augmentation
 
 ```python
 def data_augmentation(X_train, y_train, batch_size=32):
