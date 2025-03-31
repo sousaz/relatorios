@@ -269,4 +269,17 @@ O modelo lenet 5 teve um resultado bem ruim, na questão de treinamento ele foi 
 
 Do modelo lenet 5 para o modelo melhorado 01, foi implementado 2 dropout de valores 0.25, o que melhorou muito a curva de aprendizado onde o treino e o teste foi caminhando junto. Pássaro, gato e cachorro continuaram a ser as classes menos acertadas.
 
-Do modelo 01 para o modelo 02, 
+Do modelo 01 para o modelo 02, foi mudados alguns parâmetros como por exemplo o do doprout e Average Pooling para Max Pooling além de adicionar mais uma camada de Convolução e 1024 neurônios depois da camada de Flatten. Na cruva de aprendizado começou bem mas ao passar das épocas, a linha de treino e teste foram se afastando. Já em questão de acertos melhorou com todas classes acertando mais de 50%, porém as mesmas 3 classes continuaram sendo as piores.
+
+Do modelo 02 para o modelo 03, foi ajustado valor do dropout, números de neurônios além de adcionar o padding e kernel initializer. A cruva de aprendizado apesar de não se encontrarem foram pararelas durante todo treinamento, analisando a matriz confusão é possível ver que algumas classes melhoraram enquanto o acerto para outras pioraram.
+
+Do modelo 03 para o modelo 04, foram adicionadas camadas e Batch Normalization além de ter mudado a função de ativação de tanh para relu. Na cruva de aprendizado começou bem mas ao passar das épocas, a linha de treino e teste foram se afastando. Porém os acertos para cada classe aumentaram significamente.
+
+Do modelo 04 para o modelo 05, foi adicionado Data-Augmentation. A curva de aprendizado, o teste foi pararelo ao treino porém com umas quedas e subidas bruscas. E analisando a matriz de confusão é possível perceber que os acertos da maiorias das classes caíram
+
+Concluido o mlehor modelo alcançado nesse laboratório do CIFAR-10 foi o model0 04, com os seguintes resultados: 
+* Recall: 0.8484
+
+* Precision: 0.8482
+
+* F1 Score: 0.8483
