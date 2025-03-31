@@ -275,7 +275,7 @@ Do modelo 02 para o modelo 03, foi ajustado valor do dropout, números de neurô
 
 Do modelo 03 para o modelo 04, foram adicionadas camadas e Batch Normalization além de ter mudado a função de ativação de tanh para relu. Na cruva de aprendizado começou bem mas ao passar das épocas, a linha de treino e teste foram se afastando. Porém os acertos para cada classe aumentaram significamente.
 
-Do modelo 04 para o modelo 05, foi adicionado Data-Augmentation. A curva de aprendizado, o teste foi pararelo ao treino porém com umas quedas e subidas bruscas. E analisando a matriz de confusão é possível perceber que os acertos da maiorias das classes caíram
+Do modelo 04 para o modelo 05, foi adicionado Data-Augmentation. A curva de aprendizado, o teste foi pararelo ao treino porém com umas quedas e subidas bruscas. E analisando a matriz de confusão é possível perceber que os acertos da maioria das classes caíram
 
 Concluindo o melhor modelo alcançado nesse laboratório do CIFAR-10 foi o model0 04, com os seguintes resultados: 
 * Recall: 0.8484
