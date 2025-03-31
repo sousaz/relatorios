@@ -277,7 +277,7 @@ Do modelo 03 para o modelo 04, foram adicionadas camadas e Batch Normalization a
 
 Do modelo 04 para o modelo 05, foi adicionado Data-Augmentation. A curva de aprendizado, o teste foi pararelo ao treino porém com umas quedas e subidas bruscas. E analisando a matriz de confusão é possível perceber que os acertos da maiorias das classes caíram
 
-Concluido o mlehor modelo alcançado nesse laboratório do CIFAR-10 foi o model0 04, com os seguintes resultados: 
+Concluindo o melhor modelo alcançado nesse laboratório do CIFAR-10 foi o model0 04, com os seguintes resultados: 
 * Recall: 0.8484
 
 * Precision: 0.8482
