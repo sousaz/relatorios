@@ -39,75 +39,26 @@ def CNN_model(input_shape=(32, 32, 3), num_classes=10):
 ## Acurácia ponderada e Curva ROC (com a AUC)
 ![alt text](image-2.png)
 
-### Modelo Melhorado: (resnet-50)
+### Modelo melhorado: Implementando Dropout
 
 ```python
-def conv_block(x, filters, kernel_size, strides, padding='same'):
-    x = Conv2D(filters=filters, kernel_size=kernel_size, strides=strides, padding=padding)(x)
-    x = BatchNormalization()(x)
-    x = Activation('relu')(x)
-    return x
+def model1(input_shape=(32, 32, 3), num_classes=10):
+  model = Sequential()
+  model.add(Conv2D(6, kernel_size=(5, 5), activation='tanh', input_shape=input_shape))
+  model.add(AvgPool2D(pool_size=(2, 2), strides=(2, 2)))
+  model.add(Dropout(0.25))
 
-def identity_block(x, filters):
-    shortcut = x
-    x = conv_block(x, filters=filters, kernel_size=(1, 1), strides=(1, 1))
-    x = conv_block(x, filters=filters, kernel_size=(3, 3), strides=(1, 1))
-    x = Conv2D(filters=filters * 4, kernel_size=(1, 1))(x)
-    x = BatchNormalization()(x)
-    x = Add()([x, shortcut])
-    x = Activation('relu')(x)
-    return x
+  model.add(Conv2D(16, kernel_size=(5, 5), activation='tanh'))
+  model.add(AvgPool2D(pool_size=(2, 2), strides=(2, 2)))
+  model.add(Conv2D(120, kernel_size=(5, 5), activation='tanh'))
+  model.add(Dropout(0.25))
 
-def projection_block(x, filters, strides):
-    shortcut = x
-    x = conv_block(x, filters=filters, kernel_size=(1, 1), strides=strides)
-    x = conv_block(x, filters=filters, kernel_size=(3, 3), strides=(1, 1))
-    x = Conv2D(filters=filters * 4, kernel_size=(1, 1))(x)
-    x = BatchNormalization()(x)
-    shortcut = Conv2D(filters=filters * 4, kernel_size=(1, 1), strides=strides)(shortcut)
-    shortcut = BatchNormalization()(shortcut)
-    x = Add()([x, shortcut])
-    x = Activation('relu')(x)
-    return x
+  model.add(Flatten())
+  model.add(Dense(84, activation='tanh'))
+  model.add(Dense(num_classes, activation='softmax'))
 
-def ResNet50(input_shape=(224, 224, 3), num_classes=1000):
-    inputs = Input(shape=input_shape)
-    
-    # initial conv layer
-    x = conv_block(inputs, filters=64, kernel_size=(7, 7), strides=(2, 2))
-    x = MaxPooling2D(pool_size=(3, 3), strides=(2, 2), padding='same')(x)
-
-    # conv block 1
-    x = projection_block(x, filters=64, strides=(1, 1))
-    x = identity_block(x, filters=64)
-    x = identity_block(x, filters=64)
-
-    # conv block 2
-    x = projection_block(x, filters=128, strides=(2, 2))
-    x = identity_block(x, filters=128)
-    x = identity_block(x, filters=128)
-    x = identity_block(x, filters=128)
-
-    # conv block 3
-    x = projection_block(x, filters=256, strides=(2, 2))
-    x = identity_block(x, filters=256)
-    x = identity_block(x, filters=256)
-    x = identity_block(x, filters=256)
-    x = identity_block(x, filters=256)
-    x = identity_block(x, filters=256)
-
-    # conv block 4
-    x = projection_block(x, filters=512, strides=(2, 2))
-    x = identity_block(x, filters=512)
-    x = identity_block(x, filters=512)
-
-    # global average pooling and dense layer
-    x = GlobalAveragePooling2D()(x)
-    outputs = Dense(num_classes, activation='softmax')(x)
-
-    model = Model(inputs=inputs, outputs=outputs)
-    model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
-    return model
+  model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+  return model
 ```
 
 ## Curva de Aprendizado
@@ -117,13 +68,160 @@ def ResNet50(input_shape=(224, 224, 3), num_classes=1000):
 ![alt text](image-4.png)
 
 ## F1-score, Recall e Precision
-> Recall:  0.7159
+> Recall:  0.5426
 
-> Precision:  0.7272
+> Precision:  0.5356
 
-> F1 Score:  0.7215
+> F1 Score:  0.5391
 
 ## Sensibilidade(TPR) e Especifidade(TNR)
 
 ## Acurácia ponderada e Curva ROC (com a AUC)
 ![alt text](image-5.png)
+
+
+### Modelo melhorado: Mudando alguns parametros
+
+```python
+def model2(input_shape=(32, 32, 3), num_classes=10):
+  model = Sequential()
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='tanh', input_shape=input_shape))
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='tanh', input_shape=input_shape))
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.4))
+
+  model.add(Conv2D(128, kernel_size=(3, 3), activation='tanh'))
+  model.add(Conv2D(128, kernel_size=(3, 3), activation='tanh'))
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.4))
+
+  model.add(Flatten())
+  model.add(Dense(1024, activation='tanh'))
+  model.add(Dense(1024, activation='tanh'))
+  model.add(Dense(num_classes, activation='softmax'))
+
+  model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+  return model
+```
+
+## Curva de Aprendizado
+![alt text](image-6.png)
+
+## Matriz de Confusão
+![alt text](image-7.png)
+
+## F1-score, Recall e Precision
+> Recall:  0.7099
+
+> Precision:  0.7258
+
+> F1 Score:  0.7177
+
+## Sensibilidade(TPR) e Especifidade(TNR)
+
+## Acurácia ponderada e Curva ROC (com a AUC)
+![alt text](image-8.png)
+
+### Modelo melhorado: Adicionando camadas e ajustando parametros
+
+```python
+def model3(input_shape=(32, 32, 3), num_classes=10):
+  model = Sequential()
+  model.add(Conv2D(32, kernel_size=(3, 3), activation='tanh', kernel_initializer="he_uniform", padding="same", input_shape=input_shape))
+  model.add(Conv2D(32, kernel_size=(3, 3), activation='tanh', kernel_initializer="he_uniform", padding="same"))
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.2))
+
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='tanh', kernel_initializer="he_uniform", padding="same"))
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='tanh', kernel_initializer="he_uniform", padding="same"))
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.3))
+
+  model.add(Conv2D(128, kernel_size=(3, 3), activation='tanh', kernel_initializer="he_uniform", padding="same"))
+  model.add(Conv2D(128, kernel_size=(3, 3), activation='tanh', kernel_initializer="he_uniform", padding="same"))
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.4))
+
+  model.add(Flatten())
+  model.add(Dense(128, activation='tanh', kernel_initializer="he_uniform"))
+  model.add(Dropout(0.5))
+  model.add(Dense(num_classes, activation='softmax'))
+
+  model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+  return model
+```
+
+## Curva de Aprendizado
+![alt text](image-9.png)
+
+## Matriz de Confusão
+![alt text](image-10.png)
+
+## F1-score, Recall e Precision
+> Recall:  0.7017
+
+> Precision:  0.7123
+
+> F1 Score:  0.7069
+
+## Sensibilidade(TPR) e Especifidade(TNR)
+
+## Acurácia ponderada e Curva ROC (com a AUC)
+![alt text](image-11.png)
+
+### Modelo melhorado: Adicionando BatchNormalization e usando RELU como ativação
+
+```python
+def model4(input_shape=(32, 32, 3), num_classes=10):
+  model = Sequential()
+  model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same", input_shape=input_shape))
+  model.add(BatchNormalization())
+  model.add(Conv2D(32, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same"))
+  model.add(BatchNormalization())
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.2))
+
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same"))
+  model.add(BatchNormalization())
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same"))
+  model.add(BatchNormalization())
+  model.add(BatchNormalization())
+  model.add(Conv2D(64, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same"))
+  model.add(BatchNormalization())
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.3))
+
+  model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same"))
+  model.add(BatchNormalization())
+  model.add(Conv2D(128, kernel_size=(3, 3), activation='relu', kernel_initializer="he_uniform", padding="same"))
+  model.add(BatchNormalization())
+  model.add(MaxPool2D(pool_size=(2, 2)))
+  model.add(Dropout(0.4))
+
+  model.add(Flatten())
+  model.add(Dense(128, activation='relu', kernel_initializer="he_uniform"))
+  model.add(BatchNormalization())
+  model.add(Dropout(0.5))
+  model.add(Dense(num_classes, activation='softmax'))
+
+  model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+  return model
+```
+
+## Curva de Aprendizado
+![alt text](image-12.png)
+
+## Matriz de Confusão
+![alt text](image-13.png)
+
+## F1-score, Recall e Precision
+> Recall:  0.8484
+
+> Precision:  0.8482
+
+> F1 Score:  0.8483
+
+## Sensibilidade(TPR) e Especifidade(TNR)
+
+## Acurácia ponderada e Curva ROC (com a AUC)
+![alt text](image-14.png)
