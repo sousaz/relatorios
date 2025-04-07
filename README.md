@@ -248,20 +248,23 @@ def data_augmentation(X_train, y_train, batch_size=32):
 ```
 
 ## Curva de Aprendizado
-![alt text](image-15.png)
+![image](https://github.com/user-attachments/assets/59c780b0-3d27-498b-b320-b85b7c24d078)
+
 
 ## Matriz de Confusão
-![alt text](image-16.png)
+![image](https://github.com/user-attachments/assets/17a0d4a5-b150-489c-96c3-d2b18e08cc14)
+
 
 ## F1-score, Recall e Precision
-> Recall:  0.8324
+> Recall:  0.8764
 
-> Precision:  0.8405
+> Precision:  0.8783
 
-> F1 Score:  0.8364
+> F1 Score:  0.8773
 
 ## Curva ROC (com a AUC)
-![alt text](image-17.png)
+![image](https://github.com/user-attachments/assets/5dcda038-0c42-48ef-aea9-f3007a777c3b)
+
 
 ### Análise dos resultados
 
@@ -275,11 +278,11 @@ Do modelo 02 para o modelo 03, foi ajustado valor do dropout, números de neurô
 
 Do modelo 03 para o modelo 04, foram adicionadas camadas e Batch Normalization além de ter mudado a função de ativação de tanh para relu. Na curva de aprendizado começou bem mas ao passar das épocas, a linha de treino e teste foram se afastando. Porém os acertos para cada classe aumentaram significativamente.
 
-Do modelo 04 para o modelo 05, foi adicionado Data-Augmentation. Na curva de aprendizado, o teste foi pararelo ao treino porém com umas quedas e subidas bruscas. Analisando a matriz de confusão é possível perceber que os acertos da maioria das classes caíram.
+Do modelo 04 para o modelo 05, foi adicionado Data-Augmentation. Foi preciso treinar durante mais épocas alcançando resultados bem melhores e analisando a curva de aprendizado da de se esperar que ao treinar mais épocas talvez o modelo melhore um pouco mais.
 
-Concluindo o melhor modelo alcançado nesse laboratório do CIFAR-10 foi o modelo 04, com os seguintes resultados: 
-* Recall: 0.8484
+Concluindo o melhor modelo alcançado nesse laboratório do CIFAR-10 foi o modelo 05, com os seguintes resultados: 
+* Recall: 0.8764
 
-* Precision: 0.8482
+* Precision: 0.8783
 
-* F1 Score: 0.8483
+* F1 Score: 0.8773
