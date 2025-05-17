@@ -17,7 +17,7 @@ O objetivo deste trabalho é construir um modelo baseado em Redes Neurais Recorr
 A base de dados utilizada contém registros diários de temperaturas mínimas na cidade de Melbourne, Austrália.  
 Cada entrada representa a menor temperatura registrada em um determinado dia.
 
-![alt text](image.png)
+![Exemplo dos dados do dataset]([image.png](https://github.com/sousaz/relatorios/blob/main/rnn/image.png?raw=true))
 ---
 
 ## 3. Pré-processamento dos Dados
@@ -186,9 +186,9 @@ E também foi allterado os numeros de neurônios e camadas, mas o modelo com 3 c
 
 Os resultados obtidos indicam que a arquitetura do experimento 3 foi a mais eficiente para a tarefa. Com um MAE de 1,75 e um R² de 0,71, o modelo foi capaz de prever temperaturas mínimas com uma precisão razoável.
 
-![alt text](image-1.png)
+![Real vs Previsto]([image-1.png](https://github.com/sousaz/relatorios/blob/main/rnn/image-1.png?raw=true))
 
-![alt text](image-2.png)
+![Curva de aprendizado]([image-2.png](https://github.com/sousaz/relatorios/blob/main/rnn/image-2.png?raw=true))
 
 ---
 
