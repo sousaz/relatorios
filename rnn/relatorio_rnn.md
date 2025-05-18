@@ -18,6 +18,7 @@ A base de dados utilizada contém registros diários de temperaturas mínimas na
 Cada entrada representa a menor temperatura registrada em um determinado dia.
 
 ![Exemplo dos dados do dataset](https://github.com/sousaz/relatorios/blob/main/rnn/image.png?raw=true)
+
 ---
 
 ## 3. Pré-processamento dos Dados
